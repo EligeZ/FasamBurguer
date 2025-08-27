@@ -1,0 +1,35 @@
+<%- include("partials/header.ejs") %>
+
+    <body>
+        <div class="container">
+            <h1>
+                <%= post.titulo %>
+            </h1>
+            <p class="text-muted">Por <%= post.nome %> - <%= post.date.toLocaleDateString() %>
+            </p>
+            <hr>
+            <p>
+                <%= post.texto %>
+            </p>
+
+            <div class="buttons-container">
+                <a class="btn btn-warning" href="/novo?id=<%= post.id %>" role="button">Editar</a>
+                <form action="/excluir/<%= post.id %>" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
+                <a class="btn btn-secondary" href="/" role="button">Voltar para Home</a>
+            </div>
+        </div>
+    </body>
+
+    <%- include("partials/footer.ejs") %>
+
+        <!-- Comentários do arquivo 'materia.ejs':
+
+- <h1><%#= post.nome %></h1>: Exibe o nome da postagem.
+- <p class="text-muted"><%#= post.date.toLocaleDateString() %></p>: Exibe a data da postagem.
+- <p><%#= post.texto %></p>: Exibe o texto completo da postagem.
+- <a class="btn btn-warning" href="/novo?id=<%#= post.id %>" ...>: Link para a página de edição ('/novo') passando o ID da postagem via query.
+- <form action="/excluir/<%#= post.id %>" method="POST" ...>: Formulário para excluir a postagem, enviando um POST para a rota de exclusão.
+- <button type="submit" class="btn btn-danger">Excluir</button>: Botão de envio do formulário de exclusão.
+- <a class="btn btn-secondary" href="/" ...>: Link para voltar para a página inicial. -->

@@ -1,0 +1,52 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container">
+  <h1 class="page-title">Pratos Cadastrados</h1>
+
+  <% if (errorMessage) { %>
+  <div class="alert alert-danger"><%= errorMessage %></div>
+  <% } %>
+
+  <div class="top-buttons">
+    <a href="/pratos?id=" class="btn btn-success btn-lg corBotao"
+      >Adicionar Novo Prato</a
+    >
+  </div>
+
+  <% if (burguers && burguers.length > 0) { %>
+  <div class="pratos-grid">
+    <% burguers.forEach(burguer => { %>
+    <div class="prato-card">
+      <h3><%= burguer.nome %></h3>
+      <p>
+        <strong>Preço:</strong> R$ <%= burguer.preco.toFixed(2).replace('.',
+        ',') %>
+      </p>
+      <p><%= burguer.descricao %></p>
+      <div class="prato-actions">
+        <a href="/pratos?id=<%= burguer.id %>" class="btn btn-warning btn-sm"
+          >Editar</a
+        >
+        <form
+          action="/excluir-prato/<%= burguer.id %>"
+          method="POST"
+          style="display: inline"
+        >
+          <button
+            type="submit"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Tem certeza que deseja excluir este prato?');"
+          >
+            Excluir
+          </button>
+        </form>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+  <% } else { %>
+  <p class="no-pratos-message">Ainda não há pratos cadastrados.</p>
+  <% } %>
+</div>
+
+<%- include("partials/footer.ejs") %>

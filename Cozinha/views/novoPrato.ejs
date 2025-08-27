@@ -1,0 +1,128 @@
+<%- include("partials/header.ejs") %>
+
+<body>
+  <div class="container">
+    <h1><%= post ? 'Editar Prato' : 'Novo Prato' %></h1>
+    <% if (locals.error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+    <% } %> <% if (errorMessage) { %>
+    <div class="alert alert-danger"><%= errorMessage %></div>
+    <% } %>
+    <form action="/salvar" method="POST" enctype="multipart/form-data">
+      <% if (post) { %>
+      <input type="hidden" name="id" value="<%= post.id %>" />
+      <input
+        type="hidden"
+        name="manterImagemExistente"
+        id="manterImagemExistente"
+        value="true"
+      />
+      <% } %>
+      <div class="mb-3">
+        <label for="nomePratoInput" class="form-label">Nome do prato</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nomePratoInput"
+          name="nome"
+          placeholder="Digite o nome do prato aqui..."
+          value="<%= post ? post.nome : '' %>"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="precoPratoInput" class="form-label">Preço do prato</label>
+        <input
+          type="number"
+          step="0.01"
+          class="form-control"
+          id="precoPratoInput"
+          name="preco"
+          placeholder="Digite o valor do prato aqui..."
+          value="<%= post ? post.preco : '' %>"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="descricaoPratoInput" class="form-label"
+          >Descrição do prato</label
+        >
+        <textarea
+          class="form-control"
+          id="descricaoPratoInput"
+          name="descricao"
+          rows="5"
+          required
+        >
+<%= post ? post.descricao : '' %></textarea
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="imagemPratoInput" class="form-label"
+          >Imagem do Prato (Opcional)</label
+        >
+        <input
+          type="file"
+          class="form-control"
+          id="imagemPratoInput"
+          name="imagem"
+          accept="image/*"
+        />
+        <% if (post && post.imagemUrl) { %>
+        <div class="mt-2">
+          <p>Imagem atual:</p>
+          <img
+            src="/images/burguers/<%= post.imagemUrl %>"
+            alt="Imagem do Prato"
+            style="max-width: 150px; height: auto"
+          />
+          <button
+            type="button"
+            class="btn btn-sm btn-danger mt-2"
+            id="removerImagemBtn"
+          >
+            Remover Imagem
+          </button>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="buttons-container">
+        <button type="submit" class="btn btn-primary btn-lg corBotao">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Script para lidar com a remoção da imagem existente
+    document.addEventListener("DOMContentLoaded", () => {
+      const removerImagemBtn = document.getElementById("removerImagemBtn");
+      const manterImagemExistenteInput = document.getElementById(
+        "manterImagemExistente"
+      );
+
+      if (removerImagemBtn && manterImagemExistenteInput) {
+        removerImagemBtn.addEventListener("click", () => {
+          if (confirm("Tem certeza que deseja remover a imagem?")) {
+            manterImagemExistenteInput.value = "false"; // Sinaliza para o backend remover a imagem
+            removerImagemBtn.style.display = "none"; // Esconde o botão de remover
+            // Opcional: Remover a pré-visualização da imagem
+            const currentImage = removerImagemBtn.previousElementSibling;
+            if (currentImage && currentImage.tagName === "IMG") {
+              currentImage.remove();
+            }
+            alert(
+              'Imagem marcada para remoção ao salvar. Para confirmar, clique em "Salvar".'
+            );
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+<%- include("partials/footer.ejs") %>

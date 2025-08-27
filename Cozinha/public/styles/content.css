@@ -1,0 +1,187 @@
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+textarea.form-control {
+  min-height: 120px;
+}
+
+.navFontCor .navbar-brand {
+  color: #dbe2ef !important;
+}
+
+.navFontCor .navbar-nav .nav-link {
+  color: #ffffff !important;
+}
+
+.navFontCor .navbar-nav .nav-link.active {
+  color: #262f63 !important;
+}
+
+footer p {
+  color: #dbe2ef !important;
+}
+
+footer a {
+  color: #3f72af !important;
+}
+
+.textoDestaque h1 {
+  color: #262f63;
+}
+
+.textoDestaque p {
+  color: #a90e0e;
+}
+
+.tituloLista {
+  color: #a73737;
+}
+
+.tituloNovo {
+  color: #a73737;
+}
+
+.page-title {
+  text-align: center;
+  color: #262f63;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.top-buttons {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pratos-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* 3 colunas, ajusta para telas menores */
+  gap: 20px; /* Espaço entre os cards */
+  padding: 20px;
+}
+
+.prato-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.prato-card h3 {
+  color: #a90e0e;
+  margin-bottom: 10px;
+}
+
+.prato-card p {
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.prato-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end; /* Alinha os botões à direita */
+}
+
+.prato-actions .btn {
+  width: auto; /* Deixa os botões de ação adaptarem o tamanho */
+  padding: 8px 15px;
+  font-size: 0.9rem;
+}
+
+.no-pratos-message {
+  text-align: center;
+  color: #777;
+  margin-top: 50px;
+  font-size: 1.2rem;
+}
+
+/* Cores para os novos botões */
+.btn.btn-success {
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+  color: white !important;
+}
+.btn.btn-success:hover {
+  background-color: #218838 !important;
+}
+.btn.btn-warning {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+  color: #212529 !important;
+}
+.btn.btn-warning:hover {
+  background-color: #e0a800 !important;
+}
+.btn.btn-danger {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: white !important;
+}
+.btn.btn-danger:hover {
+  background-color: #c82333 !important;
+}
+
+.prato-imagem-lista {
+  width: 80px; /* Largura padrão */
+  height: 80px; /* Altura padrão para ser quadrado */
+  object-fit: cover; /* Garante que a imagem preencha a área sem distorcer, cortando se necessário */
+  border-radius: 5px; /* Bordas arredondadas (opcional) */
+  border: 1px solid #ddd; /* Borda leve (opcional) */
+}
+
+.box {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  border-radius: 4px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.item .info {
+  background: red;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.descricao {
+  display: none;
+  text-align: left;
+  color: #555;
+  margin-left: 1.5rem;
+}

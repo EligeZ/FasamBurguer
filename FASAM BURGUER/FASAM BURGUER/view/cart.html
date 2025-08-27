@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/cart.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
+    <title>FASAM BURGER | Carrinho de compras</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="back">
+        <a href="../index.html">
+          <span
+            class="iconify-inline"
+            data-icon="ion:arrow-back-outline"
+          ></span>
+          Voltar
+        </a>
+      </div>
+      <div class="cartNotify" style="display: none"></div>
+      <!-- Top -->
+      <h1>Carrinho de compras</h1>
+      <p class="info">
+        Ao clicar em ‘Gerar Pedido’ o seu pedido será lançado na cozinha da
+        lanchonete . Por isso, verifique todos os itens da sua lista antes de
+        continuar. Após ser redirecionado você finalizará a compra efetuando o
+        pagamento para um de nossos atendentes. =D
+      </p>
+      <!-- Content -->
+      <div class="row">
+        <!-- Left -->
+        <div class="items">
+          <h2>Itens escolhidos</h2>
+          <hr />
+          <div id="showItems">
+            <!-- ITEMS -->
+          </div>
+        </div>
+        <!-- Right -->
+        <div class="total">
+          <h2>Valor final</h2>
+          <hr />
+          <div class="division">
+            <h3>Alimentação</h3>
+            <div class="option">
+              <p>Comer no local</p>
+              <button id="dontWantDelivery" class="active"></button>
+            </div>
+            <div class="option">
+              <p>Levar para viagem</p>
+              <button id="wantDelivery"></button>
+            </div>
+          </div>
+          <div class="division"></div>
+          <div class="division">
+            <h3>Informações</h3>
+            <div class="item">
+              <p>Valor do pedido:</p>
+              <span id="showAllItemsValue">Carregando...</span>
+            </div>
+          </div>
+          <!-- Adicione isso logo abaixo de "Valor do pedido" -->
+          <div class="item">
+            <p>Taxa de entrega:</p>
+            <span id="showDelivery">R$ 0,00</span>
+          </div>
+
+          <div class="item">
+            <p>Desconto aplicado:</p>
+            <span id="showDiscount">R$ 0,00</span>
+          </div>
+
+          <div class="item">
+            <p>Total final:</p>
+            <span id="showTotal">R$ 0,00</span>
+          </div>
+          <hr />
+          <div class="item"></div>
+          <button id="generateOrder">Gerar Pedido</button>
+          <div class="keepBuying">
+            <p>ou</p>
+            <a href="../index.html">Continuar comprando</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script type="module" src="../js/cart.js"></script>
+    <script type="module" src="../js/shoppingCart.js"></script>
+  </body>
+</html>

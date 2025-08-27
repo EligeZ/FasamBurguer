@@ -1,0 +1,174 @@
+<%- include("partials/header.ejs") %>
+
+<style>
+  #counter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  #counter {
+    width: 100px;
+    height: 100px;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  #counter-label {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  #call-btn {
+    display: block;
+    margin: 10px auto 20px auto;
+    width: 30%;
+    min-width: 120px;
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+
+  .item {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .descricao {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .btn-acao {
+    margin-top: 8px;
+    padding: 6px 10px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+</style>
+
+<div id="counter-container">
+  <div id="counter">0</div>
+  <div id="counter-label">Pedidos na Fila</div>
+</div>
+
+<button id="call-btn">Chamar Pedido</button>
+
+<div id="grid"></div>
+
+<script>
+  async function updateCounter() {
+    try {
+      const res = await fetch("/cozinha/pedidos/count");
+      const { count } = await res.json();
+      document.getElementById("counter").textContent = count;
+    } catch (err) {
+      console.error("❌ Erro ao atualizar contador:", err);
+    }
+  }
+
+  async function chamarPedido() {
+    const res = await fetch("/cozinha/pedidos/chamar", { method: "POST" });
+    if (!res.ok) {
+      const erro = await res
+        .json()
+        .catch(() => ({ error: "Erro desconhecido" }));
+      return alert(`❌ ${erro.error}`);
+    }
+
+    const data = await res.json();
+    if (!data.detalhes || !Array.isArray(data.detalhes)) {
+      return alert("Erro ao carregar pedido.");
+    }
+
+    renderGrid(data.detalhes);
+    updateCounter();
+  }
+
+  function renderGrid(list) {
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
+    list.forEach((item) => {
+      const box = document.createElement("div");
+      box.className = "box";
+
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "item";
+      itemDiv.innerHTML = `<span>${item.nome} x ${item.qtd}</span>`;
+
+      const desc = document.createElement("div");
+      desc.className = "descricao";
+      desc.textContent = `${item.descricao} — R$ ${(item.preco ?? 0).toFixed(
+        2
+      )}`;
+
+      const btnEntregar = document.createElement("button");
+      btnEntregar.textContent = "Entregar";
+      btnEntregar.className = "btn-acao";
+      btnEntregar.onclick = () => entregarOuCancelarPedido("entregar");
+
+      const btnCancelar = document.createElement("button");
+      btnCancelar.textContent = "Cancelar";
+      btnCancelar.className = "btn-acao";
+      btnCancelar.onclick = () => entregarOuCancelarPedido("cancelar");
+
+      box.append(itemDiv, desc, btnEntregar, btnCancelar);
+      grid.appendChild(box);
+    });
+  }
+
+  async function entregarOuCancelarPedido(acao) {
+    const endpoint =
+      acao === "entregar"
+        ? "/cozinha/pedidos/entregar"
+        : "/cozinha/pedidos/cancelar";
+    try {
+      const res = await fetch(endpoint, { method: "POST" });
+      if (!res.ok) {
+        const erro = await res
+          .json()
+          .catch(() => ({ error: "Erro desconhecido" }));
+        return alert(`❌ ${erro.error}`);
+      }
+      alert(`✅ Pedido ${acao} com sucesso!`);
+      updateCounter();
+    } catch (err) {
+      console.error(`❌ Erro ao ${acao} pedido:`, err);
+    }
+  }
+
+  document.getElementById("call-btn").onclick = chamarPedido;
+  updateCounter();
+  setInterval(updateCounter, 5000);
+</script>
+
+<%- include("partials/footer.ejs") %>

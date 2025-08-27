@@ -1,0 +1,91 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #f9f7f7;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 90%; /* Ajuste para ter mais espaço para a grade */
+  max-width: 1200px; /* Um limite máximo para não ficar muito largo em telas grandes */
+  box-sizing: border-box;
+  margin: 20px auto 0;
+  flex-grow: 1;
+}
+
+footer {
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.navCor {
+  background-color: #a90e0e !important;
+}
+
+.footerCor {
+  background-color: #a90e0e !important;
+}
+
+.btn {
+  margin: 0.5rem;
+}
+
+.buttons-container {
+  /* Mantenha para a home (login) e formulário de salvar */
+  display: flex;
+  flex-direction: column; /* Garantido que seja coluna para empilhar */
+  align-items: center;
+  gap: 1rem;
+  margin: 20px auto;
+  width: 20%; /* Para os botões da home e de salvar */
+  max-width: 250px; /* Exemplo de um bom max-width para 20% */
+}
+
+.buttons-container .btn {
+  width: 100%; /* Faz com que os botões dentro desse container ocupem toda a largura */
+  margin: 0; /* Remove margem entre eles para usar o gap */
+}
+
+.corBotao {
+  background-color: #a90e0e !important;
+  border-color: #3f72af !important;
+}
+
+.corBotao:hover {
+  background-color: #3f72af !important;
+}
+
+.corBotao:active {
+  background-color: #dbe2ef !important;
+  color: #112d4e !important;
+}
+
+.textoDestaque {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 3rem;
+}
+
+.textoDestaque h1 {
+  margin-bottom: 10px;
+}
+
+.textoDestaque p {
+  margin-top: 10px;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem auto;
+  max-width: 960px;
+}
